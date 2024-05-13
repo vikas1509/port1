@@ -30,13 +30,7 @@ function AwardsComponent({ heading, photos }) {
       <h3>Awards</h3>
       <h3>{heading}</h3>
       {photoUrls.map((url, index) => (
-       
-<img
-  key={index}
-  src={`data:image/jpeg;base64,YmxvYjpodHRwOi8vbG9jYWxob3N0OjUxNzMvMzE5NDhjNzQtNTViYy00YTliLWJkNDctMWNiMmVhM2JmMmFh`}
-  alt={`Certificate ${index + 1}`}
-/>
-
+        <img key={index} src={url} alt={`Certificate ${index + 1}`} />
       ))}
     </div>
   );
