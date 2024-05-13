@@ -91,7 +91,6 @@ function FormPage() {
     reader.readAsDataURL(file);
   };
   
-
   const handleResumeChange = (e) => {
     const file = e.target.files[0];
     setFormData({
@@ -128,6 +127,10 @@ function FormPage() {
         <label htmlFor="picture">Profile Picture:</label>
         <input type="file" id="picture" name="picture" onChange={(e) => handleFileChange(e, 0, 'photo')} accept="image/*" required />
         {formData.awards[0].photo && <img src={formData.awards[0].photo} alt="Profile Picture" />}
+
+        {/* Input field for resume */}
+        <label htmlFor="resume">Resume:</label>
+        <input type="file" id="resume" name="resume" onChange={handleResumeChange} accept=".pdf" required />
 
         {/* Input fields for projects */}
         <label htmlFor="projects">Projects:</label>
@@ -198,6 +201,7 @@ function FormPage() {
         <textarea id="roleDescription" name="roleDescription" value={formData.roleDescription} onChange={handleInputChange}></textarea>
 
         <button type="submit">Submit</button>
+       
       </form>
     </section>
   );

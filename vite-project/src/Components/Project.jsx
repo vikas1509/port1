@@ -7,7 +7,7 @@ function Project({ projects }) {
       <h2>Projects</h2>
       {projects.map((project, index) => (
         <div key={index} className="project">
-          <h3>{project.name}</h3>
+         
           <h3>{project.heading}</h3>
           {console.log(project.heading)}
           <p>Description: {project.description}</p>

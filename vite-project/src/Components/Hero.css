@@ -1,55 +1,89 @@
 .hero-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px;
-    background-color: #E3E4EC; /* Background color for the left side */
-    height: 90vh;
-    font-family: "Caveat", cursive;
-    border-bottom: 20px solid white;
+    height: 100vh;
+    width: 90vw;
+    background-color: #E3E4EC;
+    padding: 20px;
   }
   
-  .hero-section h1 {
-    font-size: 3.5rem !important;
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
   
+  .left-side {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .right-side {
+    flex: 1;
+    position: relative;
+  }
+  
+  .name {
+    font-size: 2rem;
     font-weight: bold;
-    color: #333; /* Font color for the name */
-    color: #131022 !important;
+    color: #333;
   }
   
   .profile-photo {
-    width: 150px;
-    padding: 10px;
-    height: 150px;
-   
-    border-radius: 40%; /* Make the image circular */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
   }
   
   .video-container {
-    width: 50%; /* Adjust as needed */
-    height: 70%;
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio for video */
+  }
+  
+  .video-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .video-thumbnail iframe {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .video-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .video-container iframe {
+  .video-popup iframe {
     width: 80%;
-    height: 100%;
-    border-radius: 50%;/* Make the iframe circular */
-    object-fit: cover;
+    height: 80%;
   }
   
-  @media (max-width: 768px) {
-    .hero-section {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .video-container {
-      width: 100%;
-      margin-top: 20px; /* Add some spacing between the name and the video on smaller screens */
-    }
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 24px;
   }
   

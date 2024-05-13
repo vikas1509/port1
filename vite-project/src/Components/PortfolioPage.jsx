@@ -5,13 +5,13 @@ import HeroSection from './HeroSection';
 import About from './About';
 import Skills from './Skills';
 import Project from './Project';
-import Footer from './Contactme';
+import Footer from './Footer';
 import AwardsComponent from './AwardsComponent';
 import ContactMe from './Contactme';
 
 function PortfolioPage() {
   const location = useLocation();
-  const {email,github,linkedin,phone, name, video, skills, projects, awards, contact,roleDescription } = location.state.formData;
+  const {email,github,linkedin,phone, name, video, skills, projects, awards, contact,roleDescription,resume } = location.state.formData;
 console.log(name,email,github,linkedin,phone,video,skills,projects);
 
   return (
@@ -27,7 +27,7 @@ console.log(name,email,github,linkedin,phone,video,skills,projects);
 <ContactMe email={email}  github={github} linkedin={linkedin} 
 phone={phone}/>
      
-
+<Footer resume={resume}/>
   
     </div>
   );
