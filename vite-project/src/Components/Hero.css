@@ -2,10 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #cad9dc; /* Background color for the left side */
+    padding: 10px;
+    background-color: #E3E4EC; /* Background color for the left side */
     height: 90vh;
     font-family: "Caveat", cursive;
+    border-bottom: 20px solid white;
   }
   
   .hero-section h1 {
@@ -18,7 +19,9 @@
   
   .profile-photo {
     width: 150px;
+    padding: 10px;
     height: 150px;
+   
     border-radius: 40%; /* Make the image circular */
     object-fit: cover;
   }

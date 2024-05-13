@@ -5,22 +5,28 @@ import HeroSection from './HeroSection';
 import About from './About';
 import Skills from './Skills';
 import Project from './Project';
-import Footer from './Footer ';
+import Footer from './Contactme';
+import AwardsComponent from './AwardsComponent';
+import ContactMe from './Contactme';
 
 function PortfolioPage() {
   const location = useLocation();
-  const { name, video, skills, projects, awards, contact,roleDescription } = location.state.formData;
-console.log(skills);
+  const {email,github,linkedin,phone, name, video, skills, projects, awards, contact,roleDescription } = location.state.formData;
+console.log(name,email,github,linkedin,phone,video,skills,projects);
 
   return (
     <div className="portfolio-container">
      
         <HeroSection name={name} videoLink={video} />
         <About roledescription={roleDescription}/>
+        
 <Skills skills={skills}/>
 
 <Project projects={projects}/>
-     <Footer/>
+<AwardsComponent name={awards.name} photo={awards.photo}/>
+<ContactMe email={email}  github={github} linkedin={linkedin} 
+phone={phone}/>
+     
 
   
     </div>
