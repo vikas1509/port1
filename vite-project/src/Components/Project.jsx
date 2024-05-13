@@ -8,6 +8,8 @@ function Project({ projects }) {
       {projects.map((project, index) => (
         <div key={index} className="project">
           <h3>{project.name}</h3>
+          <h3>{project.heading}</h3>
+          {console.log(project.heading)}
           <p>Description: {project.description}</p>
           <p>Link: <a href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a></p>
         </div>

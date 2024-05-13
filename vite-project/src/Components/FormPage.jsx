@@ -133,7 +133,7 @@ function FormPage() {
         <label htmlFor="projects">Projects:</label>
         {formData.projects.map((project, index) => (
           <div key={index}>
-            <label htmlFor={`project-heading-${index}`}>Project Name:</label>
+            <label htmlFor={`project-heading-${index}`}>Project Heading:</label>
             <input
               type="text"
               id={`project-heading-${index}`}

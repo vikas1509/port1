@@ -5,8 +5,15 @@ function Skills({ skills }) {
     <div>
       <h2>Technical Skills</h2>
       <ul>
-        {skills.map((skill, index) => (
-          <li key={index}>{skill}</li>
+        {skills.map((skillString, index) => (
+          <li key={index}>
+            <h3>Skill {index + 1}</h3>
+            <ul>
+              {skillString.split(',').map((skill, skillIndex) => (
+                <li key={skillIndex}>{skill.trim()}</li>
+              ))}
+            </ul>
+          </li>
         ))}
       </ul>
     </div>
