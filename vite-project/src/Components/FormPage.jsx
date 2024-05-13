@@ -74,15 +74,23 @@ function FormPage() {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      const newAwards = [...formData.awards];
-      newAwards[index][field] = reader.result;
-      setFormData({
-        ...formData,
-        awards: newAwards
-      });
+      if (field === 'photo') {
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          picture: reader.result
+        }));
+      } else {
+        const newAwards = [...formData.awards];
+        newAwards[index][field] = reader.result;
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          awards: newAwards
+        }));
+      }
     };
     reader.readAsDataURL(file);
   };
+  
 
   const handleResumeChange = (e) => {
     const file = e.target.files[0];
