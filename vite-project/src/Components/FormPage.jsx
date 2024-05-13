@@ -10,16 +10,16 @@ function FormPage() {
     github: '',
     linkedin: '',
     video: '',
-    picture: '',
     skills: [],
     projects: [{ heading: '', description: '', link: '' }],
-    awards: [{ name: '', photo: '' }],
+    awards: [{ name: '', photos: [] }],
     resume: null,
     bio: '',
     education: '',
     experience: '',
     roleDescription: ''
   });
+
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -29,6 +29,8 @@ function FormPage() {
       [name]: value
     });
   };
+
+  
 
   const handleSkillsChange = (e) => {
     const skills = e.target.value.split('\n').map(skill => skill.trim()).filter(skill => skill !== '');
@@ -66,30 +68,33 @@ function FormPage() {
   const addAward = () => {
     setFormData({
       ...formData,
-      awards: [...formData.awards, { name: '', photo: '' }]
+      awards: [...formData.awards, { name: '', photos: [] }]
     });
   };
-
   const handleFileChange = (e, index, field) => {
+  
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      if (field === 'photo') {
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          picture: reader.result
-        }));
-      } else {
-        const newAwards = [...formData.awards];
-        newAwards[index][field] = reader.result;
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          awards: newAwards
-        }));
+      const newAwards = [...formData.awards];
+      // Check if the photos array already exists for the award, if not, initialize it
+      if (!newAwards[index].photos) {
+        newAwards[index].photos = [];
       }
+      // Push the new photo to the photos array
+      newAwards[index].photos.push(reader.result);
+      // Update the state with the new photos array
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        awards: newAwards
+
+      }));
+    
     };
     reader.readAsDataURL(file);
   };
+  
+  
   
   const handleResumeChange = (e) => {
     const file = e.target.files[0];
@@ -101,9 +106,7 @@ function FormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Process form submission here
     console.log(formData);
-    // Redirect to portfolio page
     navigate('/portfolio', { state: { formData } });
   };
 
@@ -111,7 +114,6 @@ function FormPage() {
     <section id="form">
       <h2>Submit Your Information</h2>
       <form onSubmit={handleSubmit}>
-        {/* Input fields for personal information */}
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required />
         <label htmlFor="email">Email:</label>
@@ -124,15 +126,10 @@ function FormPage() {
         <input type="text" id="linkedin" name="linkedin" value={formData.linkedin} onChange={handleInputChange} required />
         <label htmlFor="video">Video:</label>
         <input type="text" id="video" name="video" value={formData.video} onChange={handleInputChange} required />
-        <label htmlFor="picture">Profile Picture:</label>
-        <input type="file" id="picture" name="picture" onChange={(e) => handleFileChange(e, 0, 'photo')} accept="image/*" required />
-        {formData.awards[0].photo && <img src={formData.awards[0].photo} alt="Profile Picture" />}
 
-        {/* Input field for resume */}
         <label htmlFor="resume">Resume:</label>
         <input type="file" id="resume" name="resume" onChange={handleResumeChange} accept=".pdf" required />
 
-        {/* Input fields for projects */}
         <label htmlFor="projects">Projects:</label>
         {formData.projects.map((project, index) => (
           <div key={index}>
@@ -160,10 +157,10 @@ function FormPage() {
               required
             />
           </div>
+          
         ))}
         <button type="button" onClick={addProject}>Add Project</button>
 
-        {/* Input fields for awards */}
         <label htmlFor="awards">Awards/Certificates:</label>
         {formData.awards.map((award, index) => (
           <div key={index}>
@@ -179,16 +176,17 @@ function FormPage() {
             <input
               type="file"
               id={`award-photo-${index}`}
-              onChange={(e) => handleFileChange(e, index, 'photo')}
+              onChange={(e) => handleFileChange(e, index, 'photos')}
               accept="image/*"
               required
             />
-            {award.photo && <img src={award.photo} alt={`Certificate ${index}`} />}
+            {award.photos && award.photos.map((photo, photoIndex) => (
+              <img key={photoIndex} src={photo} alt={`Certificate ${index}`} />
+            ))}
           </div>
         ))}
         <button type="button" onClick={addAward}>Add Award/Certificate</button>
 
-        {/* Other input fields for other sections */}
         <label htmlFor="skills">Skills:</label>
         <textarea id="skills" name="skills" value={formData.skills.join('\n')} onChange={handleSkillsChange}></textarea>
         <label htmlFor="bio">Bio:</label>
@@ -201,7 +199,6 @@ function FormPage() {
         <textarea id="roleDescription" name="roleDescription" value={formData.roleDescription} onChange={handleInputChange}></textarea>
 
         <button type="submit">Submit</button>
-       
       </form>
     </section>
   );
